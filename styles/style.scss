@@ -1,0 +1,244 @@
+@import "variables";
+@import "modules";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: none;
+}
+img {
+  mix-blend-mode: darken; //resimlerin arka planını sayfaya uyarlıyor
+}
+
+body {
+  background-color: $bg-color;
+  font-family: $main-font;
+  overflow-x: hidden;
+}
+//responsive tasarım
+@mixin mobile {
+  @media (max-width: 800px) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media (max-width: 800px) and (max-width: 1400px) {
+    @content;
+  }
+}
+//header
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  img {
+    width: 50px;
+    margin-left: 20px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    a {
+      text-decoration: none;
+      color: var($text-color);
+      &:hover {
+        color: crimson;
+        transition: all 0.5s;
+      }
+    }
+  }
+}
+#nav-left {
+  a {
+    padding: 0 20px;
+    border-right: 1px solid gray;
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+#nav-right {
+  gap: 30px;
+  font-size: 15px;
+  @include mobile {
+    display: none;
+  }
+}
+.opener {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: -125px;
+  background-color: rgb(220, 220, 220);
+  box-shadow: 2px 2px 10px;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+}
+.menu {
+  width: 40px;
+  display: none;
+  @include mobile {
+    display: block;
+  }
+  &:hover + .opener {
+    display: flex;
+  }
+}
+
+/* hero alanı */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 100px;
+  background: linear-gradient(rgb(215, 215, 215) 40%, $bg-color);
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 40px;
+  }
+  @include laptop {
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+  }
+}
+.slogan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  max-width: 500px;
+  h1 {
+    @extend %heading;
+    font-size: 40px;
+    span {
+      font-family: "Courier New", Courier, monospace;
+    }
+  }
+  p {
+    @extend %p;
+  }
+  img {
+    width: 200px;
+  }
+  h2 {
+    @extend %heading;
+  }
+  button {
+    @extend %button;
+    background-color: crimson;
+    &:hover {
+      background-color: rgb(168, 16, 46);
+      transition: all 0.4s;
+    }
+  }
+}
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  .images-banner {
+    max-width: 800px;
+  }
+  .images-track {
+    max-width: 400px;
+  }
+  p {
+    max-width: 500px;
+    text-align: center;
+  }
+}
+//intro alanı
+#interior {
+  @extend %design;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.3), black),
+    url("/images/bmw-banner.jpeg");
+  p {
+    font-size: 17px;
+    font-weight: bold;
+    @include mobile {
+      font-size: 15px;
+    }
+  }
+}
+//CARS ALANI
+#cars-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0;
+  .cars {
+    display: flex;
+    @include mobile {
+      flex-direction: column;
+    }
+
+    img {
+      width: 300px;
+    }
+    h3 {
+      text-align: center;
+    }
+  }
+  //harici tanımlama dışarısında özel bir tanım yaparsak bu yaptığımız geçerli olur.
+  button {
+    @extend %button;
+    background-color: aqua; //buton modulundeki renk değiştirildi
+    margin-top: 20px;
+    &:hover {
+      background-color: rgba(0, 180, 180);
+    }
+  }
+}
+/* skyline exterior */
+#exterior{
+  @extend %design;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.3), black),
+    url("/images/bmw-banner.jpeg");
+  p{
+    font-size: 15px;
+    @include mobile{
+      font-size: 10px;
+    }
+  }
+}
+/* footer */
+footer{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #000;
+  padding: 50px;
+  @include mobile{
+    flex-direction: column;
+    gap: 40px;
+  }
+    img{
+    width: 80px;
+    height: 90px;
+     mix-blend-mode: unset;
+  }
+  .footer-links{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    @include mobile{
+      align-items: center;
+    }
+  }
+  h2{
+    @extend %heading;
+    color: #fff;
+  }
+  a{
+    color: #fff;
+    text-decoration: none;
+  }
+}
